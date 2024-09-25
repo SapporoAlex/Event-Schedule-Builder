@@ -34,14 +34,13 @@ def enter_activity(activities, activity_times):
     return activities, activity_times
 
 
-def make_activities_text(activity_times, activities):
-    combined_list = ["time: " + a + "\n" + "Activity: " + b for a, b in zip(activity_times, activities)]
-    return combined_list
-
-
 def print_activities(activity_text):
-    for activity in activity_text:
-        print(activity)
+    return "\n".join(activity_text)
+
+
+def make_activities_text(activity_times, activities):
+    combined_list = ["      " + "time: " + a + "\n" + "        " + "Activity: " + b for a, b in zip(activity_times, activities)]
+    return combined_list
 
 
 def main():
@@ -88,21 +87,21 @@ def main():
                     if choice == 1:
                         enter_activity(activities, activity_times)
                     if choice == 2:
-                        if activities:
+                        if len(activities) >= 1:
                             activity_text = make_activities_text(activity_times, activities)
                         else:
                             activity_text = ["<No Activities>"]
+                        activities_str = print_activities(activity_text)  # store the formatted activities as a string
                         print(f"""
-                        
         ***********************************************
         Title: {title}
         Leader: {leader}
         Date: {date}       
         Location: {location}
         Equipment: {equipment}
-        Activities: {print_activities(activity_text)}
+        Activities: 
+        {activities_str}
         ***********************************************
-                        
                         """)
                     if choice == 3:
                         edit_menu = True
