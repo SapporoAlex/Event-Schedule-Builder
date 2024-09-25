@@ -34,13 +34,14 @@ def enter_activity(activities, activity_times):
     return activities, activity_times
 
 
-def print_activities(activity_text):
-    return "\n".join(activity_text)
-
-
 def make_activities_text(activity_times, activities):
-    combined_list = ["      " + "time: " + a + "\n" + "        " + "Activity: " + b for a, b in zip(activity_times, activities)]
+    combined_list = ["time: " + a + "\n" + "Activity: " + b for a, b in zip(activity_times, activities)]
     return combined_list
+
+
+def print_activities(activity_text):
+    for activity in activity_text:
+        print(activity)
 
 
 def main():
@@ -87,21 +88,21 @@ def main():
                     if choice == 1:
                         enter_activity(activities, activity_times)
                     if choice == 2:
-                        if len(activities) >= 1:
+                        if activities:
                             activity_text = make_activities_text(activity_times, activities)
                         else:
                             activity_text = ["<No Activities>"]
-                        activities_str = print_activities(activity_text)  # store the formatted activities as a string
                         print(f"""
+                        
         ***********************************************
         Title: {title}
         Leader: {leader}
         Date: {date}       
         Location: {location}
         Equipment: {equipment}
-        Activities: 
-        {activities_str}
+        Activities: {print_activities(activity_text)}
         ***********************************************
+                        
                         """)
                     if choice == 3:
                         edit_menu = True
@@ -141,17 +142,25 @@ def main():
                                 break
 
                     if choice == 4:
-                        workbook = xl.load_workbook("template.xlsx")
+                        workbook = xl.load_workbook("template/template.xlsx")
                         sheet = workbook.active
                         sheet['b3'] = date
                         sheet['c2'] = title
+                        sheet['c2'].font = Font(bold=True, size=14)
                         sheet['f3'] = leader
                         sheet['f5'] = location
                         sheet['f10'] = equipment
+                        sheet['b3'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['c2'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['f3'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['f5'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['f10'].alignment = xl.styles.Alignment(wrap_text=True)
                         cur_entry = 0
                         for time, activity in zip(activity_times, activities):
                             sheet[f'b{4 + cur_entry}'] = time
                             sheet[f'c{4 + cur_entry}'] = activity
+                            sheet[f'b{4 + cur_entry}'].alignment = xl.styles.Alignment(wrap_text=True)
+                            sheet[f'c{4 + cur_entry}'].alignment = xl.styles.Alignment(wrap_text=True)
                             cur_entry += 1
                         file_name = input("Save file as: ")
                         workbook.save(f'{file_name}.xlsx')
@@ -165,3 +174,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+input("press enter")

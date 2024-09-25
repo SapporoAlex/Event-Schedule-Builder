@@ -141,17 +141,25 @@ def main():
                                 break
 
                     if choice == 4:
-                        workbook = xl.load_workbook("template.xlsx")
+                        workbook = xl.load_workbook("template/template.xlsx")
                         sheet = workbook.active
                         sheet['b3'] = date
                         sheet['c2'] = title
+                        sheet['c2'].font = Font(bold=True, size=14)
                         sheet['f3'] = leader
                         sheet['f5'] = location
                         sheet['f10'] = equipment
+                        sheet['b3'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['c2'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['f3'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['f5'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['f10'].alignment = xl.styles.Alignment(wrap_text=True)
                         cur_entry = 0
                         for time, activity in zip(activity_times, activities):
                             sheet[f'b{4 + cur_entry}'] = time
                             sheet[f'c{4 + cur_entry}'] = activity
+                            sheet[f'b{4 + cur_entry}'].alignment = xl.styles.Alignment(wrap_text=True)
+                            sheet[f'c{4 + cur_entry}'].alignment = xl.styles.Alignment(wrap_text=True)
                             cur_entry += 1
                         file_name = input("ファイル名を入力: ")
                         workbook.save(f'{file_name}.xlsx')
