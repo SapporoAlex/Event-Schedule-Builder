@@ -2,11 +2,11 @@
 This Python program allows teachers to quickly and neatly build event schedules, designed with simplicity and flexibility in mind. It enables users to input event details, add activities with their times, and export the final schedule as an Excel file. The program is available in both English and Japanese versions to accommodate different language preferences.
 
 ## Features
-Create New Event Schedules: Input key details such as event title, date, leader, location, equipment, and activities.
-Activity Management: Easily add multiple activities and times to the event schedule.
-Edit and Confirm: Review or edit all entered information before saving the final version.
-Excel Export: Automatically generates a clean and formatted Excel file from the provided event details, based on a customizable template.
-Wrap Text Formatting: Ensures that all content fits neatly into cells by enabling text wrapping for longer entries.
+- Create New Event Schedules: Input key details such as event title, date, leader, location, equipment, and activities.
+- Activity Management: Easily add multiple activities and times to the event schedule.
+- Edit and Confirm: Review or edit all entered information before saving the final version.
+- Excel Export: Automatically generates a clean and formatted Excel file from the provided event details, based on a customizable template.
+- Wrap Text Formatting: Ensures that all content fits neatly into cells by enabling text wrapping for longer entries.
 
 ## How to Use
 Run the Program: Launch the script and select "Build new schedule" to start creating an event schedule.
