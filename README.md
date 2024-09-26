@@ -9,11 +9,11 @@ This Python program allows teachers to quickly and neatly build event schedules,
 - Wrap Text Formatting: Ensures that all content fits neatly into cells by enabling text wrapping for longer entries.
 
 ## How to Use
-Run the Program: Launch the script and select "Build new schedule" to start creating an event schedule.
-Enter Event Details: Input event information like title, date, leader, location, and equipment.
-Add Activities: Input the times and details of activities to build the schedule.
-Review & Edit: Check the entered information and make any necessary changes through the confirmation menu.
-Save the File: Once everything is confirmed, save the schedule as an Excel file (.xlsx) with your preferred file name.
+- Run the Program: Launch the script and select "Build new schedule" to start creating an event schedule.
+- Enter Event Details: Input event information like title, date, leader, location, and equipment.
+- Add Activities: Input the times and details of activities to build the schedule.
+- Review & Edit: Check the entered information and make any necessary changes through the confirmation menu.
+- Save the File: Once everything is confirmed, save the schedule as an Excel file (.xlsx) with your preferred file name.
 
 ## Installation
 Clone the repository:
