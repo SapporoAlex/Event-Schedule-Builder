@@ -1,4 +1,5 @@
 import openpyxl as xl
+from openpyxl.styles import Font
 
 
 def enter_title():
@@ -40,8 +41,7 @@ def make_activities_text(activity_times, activities):
 
 
 def print_activities(activity_text):
-    for activity in activity_text:
-        print(activity)
+    return "\n".join(activity_text)
 
 
 def main():
@@ -88,19 +88,20 @@ def main():
                     if choice == 1:
                         enter_activity(activities, activity_times)
                     if choice == 2:
-                        if activities:
+                        if len(activities) >= 1:
                             activity_text = make_activities_text(activity_times, activities)
                         else:
                             activity_text = ["<No Activities>"]
+                        activities_str = print_activities(activity_text)
                         print(f"""
-                        
         ***********************************************
         Title: {title}
         Leader: {leader}
         Date: {date}       
         Location: {location}
         Equipment: {equipment}
-        Activities: {print_activities(activity_text)}
+        Activities:
+        {activities_str}
         ***********************************************
                         
                         """)
@@ -173,6 +174,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
-
-input("press enter")
+    try:
+        main()
+    except Exception as e:
+        print(f"There was an error: {e}")
+    input("press enter to exit.")
