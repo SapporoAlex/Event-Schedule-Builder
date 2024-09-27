@@ -145,23 +145,31 @@ def main():
                     if choice == 4:
                         workbook = xl.load_workbook("template/template.xlsx")
                         sheet = workbook.active
-                        sheet['b3'] = date
-                        sheet['c2'] = title
-                        sheet['c2'].font = Font(bold=True, size=14)
-                        sheet['f3'] = leader
-                        sheet['f5'] = location
-                        sheet['f10'] = equipment
+                        sheet['a2'] = date
+                        sheet['b1'] = title
+                        sheet['b1'].font = Font(bold=True, size=14)
+                        sheet['c1'] = leader
+                        sheet['c2'] = location
+                        sheet['c3'] = equipment
+                        sheet['b1'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['b2'].alignment = xl.styles.Alignment(wrap_text=True)
                         sheet['b3'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['b4'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['b5'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['b6'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['b7'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['b8'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['b9'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['b10'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['b11'].alignment = xl.styles.Alignment(wrap_text=True)
                         sheet['c2'].alignment = xl.styles.Alignment(wrap_text=True)
-                        sheet['f3'].alignment = xl.styles.Alignment(wrap_text=True)
-                        sheet['f5'].alignment = xl.styles.Alignment(wrap_text=True)
-                        sheet['f10'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['c3'].alignment = xl.styles.Alignment(wrap_text=True)
                         cur_entry = 0
                         for time, activity in zip(activity_times, activities):
-                            sheet[f'b{4 + cur_entry}'] = time
-                            sheet[f'c{4 + cur_entry}'] = activity
-                            sheet[f'b{4 + cur_entry}'].alignment = xl.styles.Alignment(wrap_text=True)
-                            sheet[f'c{4 + cur_entry}'].alignment = xl.styles.Alignment(wrap_text=True)
+                            sheet[f'a{2 + cur_entry}'] = time
+                            sheet[f'b{2 + cur_entry}'] = activity
+                            sheet[f'a{2 + cur_entry}'].alignment = xl.styles.Alignment(wrap_text=True)
+                            sheet[f'b{2 + cur_entry}'].alignment = xl.styles.Alignment(wrap_text=True)
                             cur_entry += 1
                         file_name = input("Save file as: ")
                         workbook.save(f'{file_name}.xlsx')
