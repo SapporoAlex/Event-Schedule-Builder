@@ -1,5 +1,5 @@
 import openpyxl as xl
-from openpyxl.styles import Font
+from openpyxl.styles import Font, Alignment
 
 
 def enter_title():
@@ -51,12 +51,12 @@ def main():
     while run:
         while main_menu:
             print(f"""
-    **********************        
+    ****************************        
     イベントビルダー
-    **********************        
+    ****************************  
     1. 新しいスケジュールを作成します。
     2. プログラムを終了します。
-    **********************
+    ****************************
 """)
             try:
                 choice = int(input(">>"))
@@ -144,25 +144,36 @@ def main():
                     if choice == 4:
                         workbook = xl.load_workbook("template/template.xlsx")
                         sheet = workbook.active
-                        sheet['a2'] = date
+                        sheet['a1'] = f"日付: {date}"
+                        sheet['a1'].font = Font(size=11)
                         sheet['b1'] = title
                         sheet['b1'].font = Font(bold=True, size=14)
-                        sheet['c1'] = leader
-                        sheet['c2'] = location
-                        sheet['c3'] = equipment
-                        sheet['b1'].alignment = xl.styles.Alignment(wrap_text=True)
-                        sheet['b2'].alignment = xl.styles.Alignment(wrap_text=True)
-                        sheet['b3'].alignment = xl.styles.Alignment(wrap_text=True)
-                        sheet['b4'].alignment = xl.styles.Alignment(wrap_text=True)
-                        sheet['b5'].alignment = xl.styles.Alignment(wrap_text=True)
-                        sheet['b6'].alignment = xl.styles.Alignment(wrap_text=True)
-                        sheet['b7'].alignment = xl.styles.Alignment(wrap_text=True)
-                        sheet['b8'].alignment = xl.styles.Alignment(wrap_text=True)
-                        sheet['b9'].alignment = xl.styles.Alignment(wrap_text=True)
-                        sheet['b10'].alignment = xl.styles.Alignment(wrap_text=True)
-                        sheet['b11'].alignment = xl.styles.Alignment(wrap_text=True)
-                        sheet['c2'].alignment = xl.styles.Alignment(wrap_text=True)
-                        sheet['c3'].alignment = xl.styles.Alignment(wrap_text=True)
+                        sheet['c1'] = f"リーダー: {leader}"
+                        sheet['c1'].font = Font(size=11)
+                        sheet['c2'] = f"場所: {location}"
+                        sheet['c2'].font = Font(size=11)
+                        sheet['c3'] = f"機器: {equipment}"
+                        sheet['c3'].font = Font(size=11)
+
+                        for row in range(1, 12):
+                            sheet[f'B{row}'].alignment = Alignment(wrap_text=True)
+                            sheet[f'B{row}'].font = Font(size=11)
+
+                        for row in [2, 3]:
+                            sheet[f'C{row}'].alignment = Alignment(wrap_text=True)
+                            sheet[f'C{row}'].font = Font(size=11)
+
+                        top_left_alignment = Alignment(horizontal='left', vertical='top', wrap_text=True)
+
+                        for row in range(1, 12):  # Apply to rows 1 to 11 in column B
+                            sheet[f'A{row}'].alignment = top_left_alignment
+
+                        for row in range(2, 12):  # Apply to rows 1 to 11 in column B
+                            sheet[f'B{row}'].alignment = top_left_alignment
+
+                        for row in range(1, 12):  # Apply to cells C2 and C3
+                            sheet[f'C{row}'].alignment = top_left_alignment
+
                         cur_entry = 0
                         for time, activity in zip(activity_times, activities):
                             sheet[f'a{2 + cur_entry}'] = time
@@ -173,6 +184,7 @@ def main():
                         file_name = input("ファイル名を入力: ")
                         workbook.save(f'{file_name}.xlsx')
                         confirmation_menu = False
+                        main_menu = True
                         break
             if choice == 2:
                 quit()
