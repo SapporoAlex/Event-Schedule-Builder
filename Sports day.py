@@ -34,27 +34,22 @@ def sort_list(list):
 
 
 def add_line_break_to_list_items(list):
-    newline_list = "\n".join(list)
-    return newline_list
-
+    if len(list) == 1:
+        return list[0]
+    return "\n".join(list)
 
 def display_table(tokiwagi, nogiku, entei, hall):
     print(f"""
 
-
 {date_string}
 ===ときわぎ===
 {tokiwagi}
-
 ===のぎく====
 {nogiku}
-
 ===園庭=====
 {entei}
-
 ===ホール===
 {hall}
-
     """)
 
 
@@ -176,8 +171,12 @@ def add_or_remove_request(loc_list):
         return add_line_break_to_list_items(loc_list)
 
 
-def save_to_excel(date_string, tokiwagi_list_sorted_newline, nogiku_list_sorted_newline, entei_list_sorted_newline,
-                  hall_list_sorted_newline):
+def save_to_excel(date_string,
+                  tokiwagi_list_sorted_newline,
+                  nogiku_list_sorted_newline,
+                  entei_list_sorted_newline,
+                  hall_list_sorted_newline
+                  ):
     workbook = xl.load_workbook("template/template 4 rows.xlsx")
     sheet = workbook.active
     sheet['a1'] = f"日付: {date_string}"
@@ -191,10 +190,23 @@ def save_to_excel(date_string, tokiwagi_list_sorted_newline, nogiku_list_sorted_
     sheet['d2'] = "ホール"
     sheet['d2'].font = Font(bold=True, size=12)
 
-    sheet['a3'] = tokiwagi_list_sorted_newline if tokiwagi_list_sorted_newline else "No activities"
-    sheet['b3'] = nogiku_list_sorted_newline if nogiku_list_sorted_newline else "No activities"
-    sheet['c3'] = entei_list_sorted_newline if entei_list_sorted_newline else "No activities"
-    sheet['d3'] = hall_list_sorted_newline if hall_list_sorted_newline else "No activities"
+    if len(tokiwagi_list_sorted_newline) == 1:
+        sheet['a3'] = tokiwagi_list_sorted_newline[0]
+    else:
+        sheet['a3'] = tokiwagi_list_sorted_newline if tokiwagi_list_sorted_newline else "無し"
+    if len(nogiku_list_sorted_newline) == 1:
+        sheet['b3'] = nogiku_list_sorted_newline[0]
+    else:
+        sheet['b3'] = nogiku_list_sorted_newline if nogiku_list_sorted_newline else "無し"
+    if len(entei_list_sorted_newline) == 1:
+        sheet['c3'] = entei_list_sorted_newline[0]
+    else:
+        sheet['c3'] = entei_list_sorted_newline if entei_list_sorted_newline else "無し"
+
+    if len(hall_list_sorted_newline) == 1:
+        sheet['a3'] = hall_list_sorted_newline[0]
+    else:
+        sheet['d3'] = hall_list_sorted_newline if hall_list_sorted_newline else "無し"
 
     sheet['a3'].font = Font(size=11)
     sheet['b3'].font = Font(size=11)
