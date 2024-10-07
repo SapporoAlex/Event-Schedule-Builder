@@ -1,5 +1,5 @@
 import openpyxl as xl
-from openpyxl.styles import Font
+from openpyxl.styles import Font, Alignment
 
 
 def enter_title():
